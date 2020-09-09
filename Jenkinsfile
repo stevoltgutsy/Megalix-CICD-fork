@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }  
     environment {
         registry = "magalixcorp/k8scicd"
         GOCACHE = "/tmp"
