@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-        timeout(time: 1, unit: 'HOURS')
+        timeout(time: 3, unit: 'HOURS')
     }  
     environment {
         registry = "magalixcorp/k8scicd"
@@ -20,6 +20,9 @@ pipeline {
                 sh 'mkdir -p ${GOPATH}/src/hello-world'
                 // Copy all files in our Jenkins workspace to our project directory.                
                 sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
+                // started Stage Build
+                echo "Started Stage Build"
+                sleep(time: 5, unit: "SECONDS")
                 // Build the app.
                 sh 'go build'               
             }     
@@ -36,6 +39,9 @@ pipeline {
                 sh 'mkdir -p ${GOPATH}/src/hello-world'
                 // Copy all files in our Jenkins workspace to our project directory.                
                 sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
+                // started Stage Test
+                echo "Started Stage Test"
+                sleep(time: 5, unit: "SECONDS")
                 // Remove cached test results.
                 sh 'go clean -cache'
                 // Run Unit Tests.
